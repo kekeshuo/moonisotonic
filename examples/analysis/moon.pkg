@@ -1,0 +1,5 @@
+import {
+  "kekeshuo/moonisotonic" @iso,
+}
+
+pkgtype(kind: "executable")
