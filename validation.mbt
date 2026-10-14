@@ -2,14 +2,14 @@
 pub(all) enum Direction {
   Increasing
   Decreasing
-} derive(Debug, Eq)
+} derive(Debug)
 
 ///|
 pub(all) struct Sample {
   x : Double
   y : Double
   weight : Double
-} derive(Debug, Eq)
+} derive(Debug)
 
 ///|
 pub(all) struct Block {
@@ -17,7 +17,7 @@ pub(all) struct Block {
   end : Int
   weight : Double
   value : Double
-} derive(Debug, Eq)
+} derive(Debug)
 
 ///|
 pub(all) struct Fit {
@@ -25,7 +25,7 @@ pub(all) struct Fit {
   blocks : Array[Block]
   objective : Double
   direction : Direction
-} derive(Debug, Eq)
+} derive(Debug)
 
 ///|
 pub fn sample(x : Double, y : Double, weight? : Double = 1.0) -> Sample {
@@ -102,3 +102,19 @@ fn squared_loss(
   }
   Ok(loss)
 }
+
+///|
+#deprecated
+pub extend Direction with @debug.Debug::{to_repr}
+
+///|
+#deprecated
+pub extend Sample with @debug.Debug::{to_repr}
+
+///|
+#deprecated
+pub extend Block with @debug.Debug::{to_repr}
+
+///|
+#deprecated
+pub extend Fit with @debug.Debug::{to_repr}
