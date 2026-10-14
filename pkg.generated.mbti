@@ -1,0 +1,324 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "kekeshuo/moonisotonic"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn audit_order(Array[Double], direction? : Direction, tolerance? : Double) -> Result[OrderAudit, String]
+
+pub fn audit_projection(Array[Double], Array[Double], Fit) -> Result[ProjectionAudit, String]
+
+pub fn band_coverage(QuantileBand, Array[Sample]) -> Result[BandCoverage, String]
+
+pub fn check_bounds(Array[Double], Array[Double], direction? : Direction) -> Result[Unit, String]
+
+pub fn compare_calibration(Array[Sample], Holdout, bin_count? : Int) -> Result[CalibrationComparison, String]
+
+pub fn contiguous_folds(Int, Int) -> Result[Array[Int], String]
+
+pub fn copy_model(Model) -> Result[Model, String]
+
+pub fn cross_validate(Array[Sample], Array[Int], Int, loss? : Loss, direction? : Direction) -> Result[CrossValidation, String]
+
+pub fn decode_model(String, max_knots? : Int) -> Result[Model, String]
+
+pub fn domain(Model) -> Result[(Double, Double), String]
+
+pub fn encode_model(Model) -> Result[String, String]
+
+pub fn evaluate(Model, Array[Sample]) -> Result[Evaluation, String]
+
+pub fn evaluate_predictions(Array[Double], Array[Double], Array[Double], loss? : Loss) -> Result[Evaluation, String]
+
+pub fn evaluation_lines(Evaluation) -> Array[String]
+
+pub fn expand_blocks(Array[Block], Int) -> Result[Array[Double], String]
+
+pub fn explain_fit(Array[Double], Array[Double], Fit) -> Result[Array[BlockExplanation], String]
+
+pub fn explanation_table(Array[BlockExplanation]) -> String
+
+pub fn fit_bounded(Array[Double], Array[Double], Array[Double], Array[Double], direction? : Direction) -> Result[Fit, String]
+
+pub fn fit_l1(Array[Double], Array[Double], direction? : Direction) -> Result[Fit, String]
+
+pub fn fit_l2(Array[Double], Array[Double], direction? : Direction) -> Result[Fit, String]
+
+pub fn fit_quantile(Array[Double], Array[Double], Double, direction? : Direction) -> Result[Fit, String]
+
+pub fn fit_range(Array[Double], Array[Double], Double, Double, direction? : Direction) -> Result[Fit, String]
+
+pub fn group_replication_counts(Prepared) -> Result[Array[Int], String]
+
+pub fn holdout(Array[Sample], Array[Int], Array[Int], loss? : Loss, direction? : Direction) -> Result[Holdout, String]
+
+pub fn inverse(Model, Double) -> Result[InverseRange, String]
+
+pub fn isotonic(Array[Double], direction? : Direction) -> Result[Fit, String]
+
+pub fn knot_arrays(Model) -> Result[(Array[Double], Array[Double]), String]
+
+pub fn pinball_loss(Array[Double], Array[Double], Array[Double], Double) -> Result[Double, String]
+
+pub fn predict(Model, Double, interpolation? : Interpolation, boundary? : Boundary) -> Result[Double, String]
+
+pub fn predict_band(QuantileBand, Array[Double]) -> Result[Array[InverseRange], String]
+
+pub fn predict_many(Model, Array[Double], interpolation? : Interpolation, boundary? : Boundary) -> Result[Array[Double], String]
+
+pub fn prepare(Array[Sample]) -> Result[Prepared, String]
+
+pub fn read_samples(String, max_rows? : Int) -> Result[Array[Sample], String]
+
+pub fn reliability(Array[Double], Array[Double], Array[Double], bin_count? : Int) -> Result[Reliability, String]
+
+pub fn resample_sensitivity(Array[Sample], Array[Array[Int]], Array[Double], lower_tau? : Double, upper_tau? : Double, loss? : Loss, direction? : Direction) -> Result[Sensitivity, String]
+
+pub fn restore_order(Array[Double], Array[Int]) -> Result[Array[Double], String]
+
+pub fn sample(Double, Double, weight? : Double) -> Sample
+
+pub fn threshold_domain(Model, Double, above? : Bool) -> Result[InverseRange, String]
+
+pub fn train(Array[Sample], loss? : Loss, direction? : Direction) -> Result[Model, String]
+
+pub fn train_band(Array[Sample], Double, Double, direction? : Direction) -> Result[QuantileBand, String]
+
+pub fn train_l1(Array[Sample], direction? : Direction) -> Result[Model, String]
+
+pub fn train_l2(Array[Sample], direction? : Direction) -> Result[Model, String]
+
+pub fn train_probability(Array[Sample], direction? : Direction) -> Result[Model, String]
+
+pub fn train_quantile(Array[Sample], Double, direction? : Direction) -> Result[Model, String]
+
+pub fn validate_model(Model) -> Result[Unit, String]
+
+pub fn validate_samples(Array[Sample]) -> Result[Unit, String]
+
+pub fn weighted_quantile(Array[Double], Array[Double], Double) -> Result[Double, String]
+
+pub fn write_predictions(Array[Sample], Model) -> Result[String, String]
+
+pub fn write_samples(Array[Sample]) -> Result[String, String]
+
+// Errors
+
+// Types and methods
+pub(all) struct BandCoverage {
+  count : Int
+  weight : Double
+  covered_weight : Double
+  coverage : Double
+  mean_width : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn BandCoverage::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Block {
+  start : Int
+  end : Int
+  weight : Double
+  value : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn Block::to_repr(Self) -> @debug.Repr
+
+pub(all) struct BlockExplanation {
+  start : Int
+  end : Int
+  fitted : Double
+  observed_mean : Double
+  observed_min : Double
+  observed_max : Double
+  weight : Double
+  squared_error : Double
+  absolute_error : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn BlockExplanation::to_repr(Self) -> @debug.Repr
+
+pub(all) enum Boundary {
+  Clamp
+  Reject
+  Extend
+} derive(@debug.Debug)
+#deprecated
+pub fn Boundary::to_repr(Self) -> @debug.Repr
+
+pub(all) struct CalibrationComparison {
+  before : Reliability
+  after : Reliability
+  brier_change : Double
+  ece_change : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn CalibrationComparison::to_repr(Self) -> @debug.Repr
+
+pub(all) struct CrossValidation {
+  predictions : Array[Double]
+  aggregate : Evaluation
+  folds : Array[Evaluation]
+} derive(@debug.Debug)
+#deprecated
+pub fn CrossValidation::to_repr(Self) -> @debug.Repr
+
+pub(all) enum Direction {
+  Increasing
+  Decreasing
+} derive(@debug.Debug)
+#deprecated
+pub fn Direction::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Evaluation {
+  count : Int
+  weight : Double
+  mse : Double
+  mae : Double
+  bias : Double
+  maximum_error : Double
+  loss : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn Evaluation::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Fit {
+  values : Array[Double]
+  blocks : Array[Block]
+  objective : Double
+  direction : Direction
+} derive(@debug.Debug)
+#deprecated
+pub fn Fit::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Holdout {
+  model : Model
+  training : Evaluation
+  validation : Evaluation
+  predictions : Array[Double]
+  validation_indices : Array[Int]
+} derive(@debug.Debug)
+#deprecated
+pub fn Holdout::to_repr(Self) -> @debug.Repr
+
+pub(all) enum Interpolation {
+  Linear
+  Previous
+  Next
+} derive(@debug.Debug)
+#deprecated
+pub fn Interpolation::to_repr(Self) -> @debug.Repr
+
+pub(all) struct InverseRange {
+  lower : Double
+  upper : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn InverseRange::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Knot {
+  x : Double
+  y : Double
+  weight : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn Knot::to_repr(Self) -> @debug.Repr
+
+pub(all) enum Loss {
+  Squared
+  Absolute
+  Quantile(Double)
+} derive(@debug.Debug)
+#deprecated
+pub fn Loss::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Model {
+  knots : Array[Knot]
+  direction : Direction
+  loss : Loss
+} derive(@debug.Debug)
+#deprecated
+pub fn Model::to_repr(Self) -> @debug.Repr
+
+pub(all) struct OrderAudit {
+  violations : Array[Int]
+  largest_drop : Double
+  total_drop : Double
+  plateaus : Int
+} derive(@debug.Debug)
+#deprecated
+pub fn OrderAudit::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Prepared {
+  samples : Array[Sample]
+  original_indices : Array[Int]
+  coordinates : Array[Double]
+  offsets : Array[Int]
+  means : Array[Double]
+  weights : Array[Double]
+} derive(@debug.Debug)
+#deprecated
+pub fn Prepared::to_repr(Self) -> @debug.Repr
+
+pub(all) struct ProjectionAudit {
+  residual_sum : Double
+  min_prefix : Double
+  max_prefix : Double
+  max_block_balance : Double
+  order : OrderAudit
+} derive(@debug.Debug)
+#deprecated
+pub fn ProjectionAudit::to_repr(Self) -> @debug.Repr
+
+pub(all) struct QuantileBand {
+  lower : Model
+  upper : Model
+  lower_tau : Double
+  upper_tau : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn QuantileBand::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Reliability {
+  bins : Array[ReliabilityBin]
+  brier : Double
+  ece : Double
+  maximum_gap : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn Reliability::to_repr(Self) -> @debug.Repr
+
+pub(all) struct ReliabilityBin {
+  index : Int
+  count : Int
+  weight : Double
+  mean_prediction : Double
+  event_rate : Double
+  gap : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn ReliabilityBin::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Sample {
+  x : Double
+  y : Double
+  weight : Double
+} derive(@debug.Debug)
+#deprecated
+pub fn Sample::to_repr(Self) -> @debug.Repr
+
+pub(all) struct Sensitivity {
+  queries : Array[Double]
+  lower : Array[Double]
+  median : Array[Double]
+  upper : Array[Double]
+  fits : Int
+} derive(@debug.Debug)
+#deprecated
+pub fn Sensitivity::to_repr(Self) -> @debug.Repr
+
+// Type aliases
+
+// Traits
