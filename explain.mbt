@@ -56,7 +56,7 @@ pub fn explain_fit(
       !finite(observed_mean) {
       return Err("explanation arithmetic overflow")
     }
-    if weight != block.weight {
+    if (weight - block.weight).abs() > 1.0e-12 * weight {
       return Err("block weight mismatch")
     }
     explanations.push({
